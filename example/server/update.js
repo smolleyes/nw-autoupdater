@@ -1,4 +1,4 @@
 const { updateManifest } = require( "./Lib/utils" ),
-      HOST = "http://localhost:8080/releases/";
+      HOST = "http://80.11.21.94:9002/releases/";
 
 updateManifest( HOST );

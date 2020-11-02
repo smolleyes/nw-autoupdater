@@ -1,7 +1,7 @@
 const fs = require( "fs" ),
       { join } = require( "path" ),
       c = require( "chalk" ),
-      HOST = "http://localhost:8080/releases/",
+      HOST = "http://localhost:9002/releases/",
       MANIFEST_FILE = join( __dirname, "/../", "/package.json" ),
       RELEASES = join( __dirname, "/../", "/releases" ),
       manifest = require( MANIFEST_FILE ),
@@ -21,7 +21,7 @@ const fs = require( "fs" ),
  * @returns {string}
  */
 function getVersion( filename ){
-  const re = /-r(\d+\.\d+\.\d+)-/;
+  const re = /(\d+\.\d+\.\d+)-/;
   const match = filename.match( re );
   return match ? match[ 1 ] : null;
 }

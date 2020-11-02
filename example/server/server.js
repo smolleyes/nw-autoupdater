@@ -3,7 +3,7 @@ const fs = require( "fs" ),
       c = require( "chalk" ),
       app = express(),
       { getVersion, updateManifest } = require( "./Lib/utils" ),
-      HOST = "http://localhost:8080/releases/",
+      HOST = "http://80.11.21.94:9002/releases/",
       cache = new Set();
 
 /**
@@ -31,6 +31,6 @@ app.use(function (req, res, next) {
 app.use( express.static( "releases" ) );
 app.use( express.static( "." ) );
 
-app.listen( 8080, () => {
-  console.log( `${c.yellow("Starting up release-server. Available on:")} ${c.green("http://127.0.0.1:8080")}` );
+app.listen( 9002, () => {
+  console.log( `${c.yellow("Starting up release-server. Available on:")} ${c.green("http://80.11.21.94:9002")}` );
 });
