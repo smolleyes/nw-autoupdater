@@ -15,7 +15,7 @@ const EventEmitter = require( "events" ),
         getExecutable, UPDATE_DIR, EXEC_DIR, BACKUP_DIR, LOG_PATH } = require( "./Lib/env" ),
 
       ERR_INVALID_REMOTE_MANIFEST = "Invalid manifest structure",
-      DEBOUNCE_TIME = 100,
+      DEBOUNCE_TIME = 1000,
 
       DEFAULT_OPTIONS = {
         executable: null,
@@ -97,7 +97,7 @@ class AutoUpdater extends EventEmitter {
     };
     try {
       remove( this.options.updateDir );
-      return await download( release.url, os.tmpdir(), debounce( onProgress, debounceTime ));
+      return await download( release.url, os.tmpdir(), onProgress);
     } catch ( e ) {
       throw new Error( `Cannot download package from ${release.url}` );
     }
@@ -123,14 +123,14 @@ class AutoUpdater extends EventEmitter {
     switch( true ) {
       case isGzRe.test( updateFile ):
          try {
-          await unpackTarGz( updateFile, updateDir, debounce( onProgress, debounceTime ) );
+          await unpackTarGz( updateFile, updateDir, onProgress );
          } catch ( e ) {
             throw new Error( `Cannot unpack .tar.gz package ${updateFile}` );
          }
          break;
       case isZipRe.test( updateFile ):
          try {
-          await unpackZip( updateFile, updateDir, debounce( onProgress, debounceTime ) );
+          await unpackZip( updateFile, updateDir, onProgress );
          } catch ( e ) {
             throw new Error( `Cannot unpack .zip package ${updateFile}: ${e.message}` );
          }
